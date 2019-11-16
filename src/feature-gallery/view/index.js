@@ -1,8 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import api from "../api";
 import { totalImages } from "../selectors";
-import { GridGallery, ImageDiv } from "./styles";
+import {
+  ProjectName,
+  Header,
+  GridGallery,
+  ImageDiv,
+  ItemContainer,
+  ImageDescription
+} from "./styles";
 
 const { getImgurGallery } = api;
 
@@ -12,14 +19,19 @@ const ImgurGallery = props => {
     getImgurGallery();
   }, [getImgurGallery]);
   return (
-    <GridGallery>
-      {images.map(image => (
-        <div key={image.id}>
-          <ImageDiv src={image.link} />
-          <div>{image.title}</div>
-        </div>
-      ))}
-    </GridGallery>
+    <Fragment>
+      <Header>
+        <ProjectName>Imgur Photo Gallery</ProjectName>
+      </Header>
+      <GridGallery>
+        {images.map(image => (
+          <ItemContainer key={image.id}>
+            <ImageDiv src={image.link} />
+            <ImageDescription>{image.title}</ImageDescription>
+          </ItemContainer>
+        ))}
+      </GridGallery>
+    </Fragment>
   );
 };
 

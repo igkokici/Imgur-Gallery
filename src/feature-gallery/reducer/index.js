@@ -2,7 +2,7 @@ import { GET_IMGUR_GALLERIES } from "../actionTypes";
 
 const initialState = {
   images: [],
-  busy: false
+  busy: true
 };
 
 export default (state = initialState, action) => {
@@ -10,7 +10,7 @@ export default (state = initialState, action) => {
     case GET_IMGUR_GALLERIES.request:
       return { ...state, busy: true };
     case GET_IMGUR_GALLERIES.success:
-      return { ...state, images: action.payload };
+      return { ...state, busy: false, images: action.payload };
     default:
       return state;
   }

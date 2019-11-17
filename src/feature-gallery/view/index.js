@@ -9,13 +9,14 @@ import {
   ImageDiv,
   VideoDiv,
   ItemContainer,
-  ImageDescription
+  ImageDescription,
+  SkeletonDiv
 } from "./styles";
 
 const { getImgurGallery } = api;
 
 const ImgurGallery = props => {
-  const { getImgurGallery, images } = props;
+  const { getImgurGallery, images, busy } = props;
   let cnt = 0;
 
   const gridColumns = images => {
@@ -23,22 +24,30 @@ const ImgurGallery = props => {
 
     return Array(4)
       .fill()
-      .map(() => {
+      .map((val, i) => {
         const returnValue = (
-          <div>
-            {images.slice(cnt, cnt + columnLength).map(image => (
-              <ItemContainer key={image.id}>
-                {!image.link.includes("mp4") ? (
-                  <ImageDiv src={image.link} />
-                ) : (
-                  <VideoDiv loop autoPlay draggable="false">
-                    <source src={image.link}></source>
-                  </VideoDiv>
-                )}
+          <div key={i}>
+            {busy ? (
+              <Fragment>
+                <SkeletonDiv />
+                <SkeletonDiv />
+                <SkeletonDiv />
+              </Fragment>
+            ) : (
+              images.slice(cnt, cnt + columnLength).map(image => (
+                <ItemContainer key={image.id}>
+                  {!image.link.includes("mp4") ? (
+                    <ImageDiv src={image.link} />
+                  ) : (
+                    <VideoDiv loop autoPlay draggable="false">
+                      <source src={image.link}></source>
+                    </VideoDiv>
+                  )}
 
-                <ImageDescription>{image.title}</ImageDescription>
-              </ItemContainer>
-            ))}
+                  <ImageDescription>{image.title}</ImageDescription>
+                </ItemContainer>
+              ))
+            )}
           </div>
         );
 
@@ -61,7 +70,8 @@ const ImgurGallery = props => {
 
 const mapStateToProps = state => {
   return {
-    images: totalImages(state)
+    images: totalImages(state),
+    busy: state.busy
   };
 };
 const mapDispatchToProps = dispatch => {

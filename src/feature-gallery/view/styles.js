@@ -24,7 +24,7 @@ const GridGallery = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
-  > div >div {
+  > div > div {
     margin-bottom: 20px;
   }
 `;
@@ -60,6 +60,15 @@ const ImageDescription = styled.div`
   bottom: 0;
 `;
 
+const SkeletonDiv = styled.div`
+  width: 100%;
+  height: 200px;
+  border-radius: 4px;
+  background-size: 145px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
+  background-color: #fff;
+`;
+
 export {
   GridGallery,
   ImageDiv,
@@ -67,5 +76,6 @@ export {
   ItemContainer,
   Header,
   ProjectName,
-  ImageDescription
+  ImageDescription,
+  SkeletonDiv
 };

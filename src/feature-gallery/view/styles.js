@@ -24,6 +24,9 @@ const GridGallery = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
+  > div >div {
+    margin-bottom: 20px;
+  }
 `;
 
 const ItemContainer = styled.div`
@@ -40,17 +43,16 @@ const ItemContainer = styled.div`
 `;
 
 const ImageDiv = styled.img`
-  ${props => {
-    return css`
-      width: 200px;
-      height: 200px;
-      cursor: pointer;
-    `;
-  }};
+  cursor: pointer;
+  width: 100%;
+`;
+
+const VideoDiv = styled.video`
+  cursor: pointer;
+  width: 100%;
 `;
 
 const ImageDescription = styled.div`
-  ${"" /* background: #474a51; */}
   padding-top: 12px;
   padding-bottom: 20px;
   color: #fff;
@@ -61,6 +63,7 @@ const ImageDescription = styled.div`
 export {
   GridGallery,
   ImageDiv,
+  VideoDiv,
   ItemContainer,
   Header,
   ProjectName,

@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const Header = styled.div`
   width: 100%;
@@ -69,6 +69,11 @@ const SkeletonDiv = styled.div`
   background-color: #fff;
 `;
 
+const DropdownDisplay = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
 export {
   GridGallery,
   ImageDiv,
@@ -77,5 +82,6 @@ export {
   Header,
   ProjectName,
   ImageDescription,
-  SkeletonDiv
+  SkeletonDiv,
+  DropdownDisplay
 };

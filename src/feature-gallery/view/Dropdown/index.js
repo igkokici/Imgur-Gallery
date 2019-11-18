@@ -1,9 +1,11 @@
-import React, { Fragment } from "react";
+import React from "react";
 import {
+  Content,
   DropdownList,
   DropdownMenu,
   DropdownTitle,
-  DropdownOptions
+  DropdownOptions,
+  AngleDownImg
 } from "./styles";
 
 const SelectIputDropdown = ({
@@ -15,7 +17,7 @@ const SelectIputDropdown = ({
   changeInput
 }) => {
   return (
-    <Fragment>
+    <Content>
       <DropdownTitle onClick={() => setOpenDropdown(name, !openDropdown)}>
         {title.toUpperCase()}
         {openDropdown ? (
@@ -33,7 +35,8 @@ const SelectIputDropdown = ({
           </DropdownMenu>
         ) : null}
       </DropdownTitle>
-    </Fragment>
+      <AngleDownImg src="https://c7.uihere.com/icons/385/589/282/angle-down-12a635f3823621fd39736e04684aca41.png" />
+    </Content>
   );
 };
 

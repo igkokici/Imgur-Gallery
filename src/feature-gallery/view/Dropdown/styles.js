@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+const Content = styled.div`
+  display: flex;
+`;
+
 const DropdownTitle = styled.div`
   font-weight: 600;
   letter-spacing: 1.5px;
@@ -49,4 +53,17 @@ const DropdownOptions = styled.div`
   }
 `;
 
-export { DropdownTitle, DropdownMenu, DropdownList, DropdownOptions };
+const AngleDownImg = styled.img`
+  width: 30px;
+  height: 30px;
+  margin-top: 25px;
+`;
+
+export {
+  DropdownTitle,
+  DropdownMenu,
+  DropdownList,
+  DropdownOptions,
+  AngleDownImg,
+  Content
+};

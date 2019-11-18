@@ -15,6 +15,7 @@ import {
 } from "./styles";
 import DropdownInput from "./Dropdown";
 import ButtonViral from "./Button";
+import ModalImgur from "./Modal";
 
 const { getImgurGallery } = api;
 
@@ -27,6 +28,8 @@ const ImgurGallery = props => {
     imageWindow: "day"
   });
   const [showViral, setShowViral] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
+  const [singleImage, setSingleImage] = useState({});
   let cnt = 0;
 
   const Dropdowns = [
@@ -59,19 +62,28 @@ const ImgurGallery = props => {
                 <SkeletonDiv />
               </Fragment>
             ) : (
-              images.slice(cnt, cnt + columnLength).map(image => (
-                <ItemContainer key={image.id}>
-                  {!image.link.includes("mp4") ? (
-                    <ImageDiv src={image.link} />
-                  ) : (
-                    <VideoDiv loop autoPlay draggable="false">
-                      <source src={image.link}></source>
-                    </VideoDiv>
-                  )}
+              images
+                .slice(cnt, cnt + columnLength)
+                .map(({ id, link, title }) => (
+                  <ItemContainer
+                    key={id}
+                    onClick={() => {
+                      setOpenModal(true);
+                      document.body.style.overflow = "hidden";
+                      setSingleImage(images.find(image => image.id === id));
+                    }}
+                  >
+                    {!link.includes("mp4") ? (
+                      <ImageDiv src={link} />
+                    ) : (
+                      <VideoDiv loop autoPlay draggable="false">
+                        <source src={link}></source>
+                      </VideoDiv>
+                    )}
 
-                  <ImageDescription>{image.title}</ImageDescription>
-                </ItemContainer>
-              ))
+                    <ImageDescription>{title}</ImageDescription>
+                  </ItemContainer>
+                ))
             )}
           </div>
         );
@@ -122,6 +134,14 @@ const ImgurGallery = props => {
         )}
       </DropdownDisplay>
       <GridGallery>{gridColumns(images)}</GridGallery>
+      <ModalImgur
+        isOpen={openModal}
+        close={() => {
+          setOpenModal(false);
+          document.body.style.overflow = "auto";
+        }}
+        image={singleImage}
+      />
     </Fragment>
   );
 };
